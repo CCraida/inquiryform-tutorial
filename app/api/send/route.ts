@@ -13,6 +13,7 @@ export async function POST(request: Request) {
     const file = formData.get("file") as File;
 
     console.log(file);
+    console.log("POST受信");
 
     const buffer =  Buffer.from(await file.arrayBuffer());
 
@@ -25,10 +26,12 @@ export async function POST(request: Request) {
             attachments: [{filename:file.name,content:buffer}],
         })
         if (error) {
+            console.log("error1");
             return NextResponse.json({error});
         }
         return NextResponse.json({ data });
     } catch (error) {
+        console.log("error2");
         return NextResponse.json({error});
     }
 }
